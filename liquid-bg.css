@@ -10,6 +10,21 @@
   mix-blend-mode: screen; /* screen = накладывается поверх тёмного фона красиво */
 }
 
+/* Перекрываем canvas под .graphs-section чёрным блоком */
+#shops .graphs-section {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+#shops .graphs-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bg2, #000);
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* Всё содержимое секций должно быть поверх canvas */
 #about    > *:not(.liquid-bg-canvas),
 #tariffs  > *:not(.liquid-bg-canvas),
