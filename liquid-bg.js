@@ -4,11 +4,12 @@
 
   function noise(x, y, t) {
     return (
-      Math.sin(x * 0.009 + t) * Math.cos(y * 0.007 - t * 0.7) +
-      Math.sin((x + y * 0.5) * 0.006 + t * 0.5) * Math.cos(x * 0.004 - y * 0.005 + t * 0.3) +
-      Math.sin(x * 0.016 - t * 0.4) * Math.cos(y * 0.013 + t * 0.22) +
-      3
-    ) / 6;
+      Math.sin(x * 0.011 + t * 0.9) * Math.cos(y * 0.009 - t * 0.6) +
+      Math.sin((x * 1.3 - y) * 0.007 + t * 0.5) * Math.cos(x * 0.005 + y * 0.006 - t * 0.4) +
+      Math.sin(x * 0.02 - t * 0.5) * Math.cos(y * 0.018 + t * 0.3) +
+      Math.cos(Math.sqrt(x * x * 0.00001 + y * y * 0.00001) + t * 0.4) +
+      4
+    ) / 8;
   }
 
   function createLiquidBg(section) {
@@ -36,15 +37,20 @@
       for (let y = 0; y < H; y += step) {
         for (let x = 0; x < W; x += step) {
           const n = noise(x, y, t);
-          const sharp = Math.pow(n, 1.6);
+          const v = Math.pow(n, 1.8);
           let r, g, b;
-          if (sharp < 0.45) {
-            const k = sharp / 0.45;
-            r = Math.round(10 + 0x7E * k);
-            g = Math.round(5  + 0x3B * k);
-            b = Math.round(20 + 0xED * k);
+          if (v < 0.3) {
+            const k = v / 0.3;
+            r = Math.round(5  + 8  * k);
+            g = Math.round(2  + 4  * k);
+            b = Math.round(15 + 20 * k);
+          } else if (v < 0.6) {
+            const k = (v - 0.3) / 0.3;
+            r = Math.round(13 + 0x7E * k);
+            g = Math.round(6  + 0x3B * k);
+            b = Math.round(35 + 0xD8 * k);
           } else {
-            const k = (sharp - 0.45) / 0.55;
+            const k = (v - 0.6) / 0.4;
             r = Math.round(0x7E + (0xC6 - 0x7E) * k);
             g = Math.round(0x3B + (0xFF - 0x3B) * k);
             b = Math.round(0xED + (0x34 - 0xED) * k);
@@ -62,7 +68,7 @@
       }
       const ctx = canvas.getContext('2d');
       ctx.putImageData(img, 0, 0);
-      t += 0.008;
+      t += 0.007;
       animId = requestAnimationFrame(drawFrame);
     }
 
