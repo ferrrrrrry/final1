@@ -1,0 +1,22 @@
+/* ── LIQUID BG CANVAS ──────────────────────────────────────────────────────── */
+.liquid-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.38;          /* прозрачность — меняй от 0.2 до 0.6 по вкусу */
+  mix-blend-mode: screen; /* screen = накладывается поверх тёмного фона красиво */
+}
+
+/* Всё содержимое секций должно быть поверх canvas */
+#about    > *:not(.liquid-bg-canvas),
+#tariffs  > *:not(.liquid-bg-canvas),
+#shops    > *:not(.liquid-bg-canvas),
+#reviews  > *:not(.liquid-bg-canvas),
+#guide    > *:not(.liquid-bg-canvas),
+#faq      > *:not(.liquid-bg-canvas) {
+  position: relative;
+  z-index: 1;
+}
