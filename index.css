@@ -327,7 +327,7 @@ select.form-select {
 }
 .quote-band-text {
   font-family: var(--px);
-  font-size: clamp(16px, 2vw, 22px);
+  font-size: clamp(14px, 2vw, 22px);
   color: #f0f0f0;
   letter-spacing: 0.04em;
   line-height: 1.35;
@@ -1423,7 +1423,7 @@ section {
 .proof-number {
   display: inline-block;
   font-family: var(--px);
-  font-size: 18px;
+  font-size: 16px;
   color: var(--green);
   border: 1px solid rgba(191, 95, 255, 0.22);
   border-radius: 99px;
